@@ -1,0 +1,11 @@
+TODO:
+
+[x]1.Make a single player game
+[x]2. Draw on the canvas
+[x]3. Capture the canvas and send it to the server
+[]4. Try image recognition on the client and decide the winner
+5. Send the winner to the server
+6. Display the winner on the client
+7. Make a multiplayer game
+8. Make a chat
+9. Make a draw section and a Display section to show live results.
