@@ -17,7 +17,8 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
    console.log("New client connected");
    socket.emit('connection', null);
-   
+
+   socket.on('save',() => saveCanvas)   
    
 
 
