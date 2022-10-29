@@ -30,6 +30,21 @@ io.on("connection", (socket) => {
         socket.emit('gameCreated', {msg: 'game created',gameId: gameId });
 
     });
+
+    socket.on('join', ({gameId}) => {
+        console.log(gameId);
+        const game = games[gameId];
+        if(game){
+            const {player , start} = join(socket.id, gameId);
+            if(start){
+                io.emit('start', {start: true});
+            }
+            socket.emit('gameJoined', {msg: 'game joined', gameId: gameId , start: start});
+        }
+        else{
+            socket.emit('error', {msg: 'game not found'});
+        }
+    });
    
 
 
@@ -54,9 +69,23 @@ const create = (id) => {
         let player = {
             id: id,
             name: 'player'+game.players.length,
+            canvasData: null,
         }
         game.players.push(player);
         games[gameId] = game;
         return gameId;
 
+}
+
+const join = (id, gameId) => {
+    let game = games[gameId];
+    let player = {
+        id: id,
+        name: 'player'+game.players.length,
+        canvasData: null,
+    }
+    game.players.push(player);
+    games[gameId] = game;
+    const start = game.players.length === 2;
+    return {player: player, start: start};
 }

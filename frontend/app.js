@@ -13,11 +13,33 @@ socket.on('gameCreated', ({gameId}) => {
     copy.style.display = 'block';
 });
 
+socket.on('gameJoined', ({gameId, start}) => {
+    console.log(gameId, start);
+});
+
+socket.on('start', ({start}) => {
+    console.log(start);
+     if(start){
+        connect.style.display = 'none';
+        game.style.display = 'block';
+     }
+    
+});
+
+
+socket.on('error', ({msg}) => {
+    console.log(msg);
+});
+
+
 
 const game =  document.getElementById('game');
 const create = document.getElementById('create');
 const gameCode = document.getElementById('gameCode');
 const copy = document.getElementById('copy');
+const join = document.getElementById('join');
+const joinGame = document.getElementById('joinCode');
+const connect = document.getElementById('connect');
 // make the game invisible
 game.style.display = 'none';
 
@@ -34,6 +56,12 @@ create.addEventListener('click', ()=>{
 copy.addEventListener('click', ()=>{
     const text = gameCode.innerText;
     navigator.clipboard.writeText(text);
+})
+
+//event listener for the join button
+join.addEventListener('click', ()=>{
+    const gameId = joinGame.value;
+    socket.emit('join', {gameId: gameId});
 })
 
 
