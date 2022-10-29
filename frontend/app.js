@@ -1,5 +1,17 @@
 const socket = io('http://localhost:3000');
  
+
+const game =  document.getElementById('game');
+const create = document.getElementById('create');
+const gameCode = document.getElementById('gameCode');
+const copy = document.getElementById('copy');
+const join = document.getElementById('join');
+const joinGame = document.getElementById('joinCode');
+const connect = document.getElementById('connect');
+
+let gameId = null;
+let player = null;
+
 socket.on('connection', ({msg}) => {
     // console.log(socket.connected)
     console.log(msg)
@@ -8,6 +20,7 @@ socket.on('connection', ({msg}) => {
 socket.on('gameCreated', ({gameId}) => {
 
     console.log(gameId);
+    gameId = gameId;
     gameCode.innerText = gameId;
     //make the cpoy button visible
     copy.style.display = 'block';
@@ -15,6 +28,8 @@ socket.on('gameCreated', ({gameId}) => {
 
 socket.on('gameJoined', ({gameId, start}) => {
     console.log(gameId, start);
+    gameId = gameId;
+    
 });
 
 socket.on('start', ({start}) => {
@@ -33,15 +48,10 @@ socket.on('error', ({msg}) => {
 
 
 
-const game =  document.getElementById('game');
-const create = document.getElementById('create');
-const gameCode = document.getElementById('gameCode');
-const copy = document.getElementById('copy');
-const join = document.getElementById('join');
-const joinGame = document.getElementById('joinCode');
-const connect = document.getElementById('connect');
+
+
 // make the game invisible
-game.style.display = 'none';
+// game.style.display = 'none';
 
 
 

@@ -11,6 +11,8 @@
 </head>
 
 <body>
+    <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
+
 
     <section id="connect" >
         <button id="create">Create a game</button>
@@ -29,13 +31,15 @@
         <div >
 
             <h2>Draw here :</h2>
-            <canvas id="myCanvas" width="400" height="400" >
+            <canvas id="myCanvas" width="280" height="280" >
                 
         </canvas>
         <button id="submit">Submit</button>
         <button id="clear">Clear</button>
         <button id="get" >get image</button>
-        <img id="canvasImg"></img>
+        <img id="canvasImg" style="height:280px; width:280px;" ></img>
+        <p id="label">label:</p>
+        <p id="confidence">confidence:</p>
     </div>
 </section>
 
@@ -44,6 +48,7 @@
     <script src="https://cdn.socket.io/4.5.3/socket.io.min.js"
         integrity="sha384-WPFUvHkB1aHA5TDSZi6xtDgkF0wXJcIIxXhC6h8OT8EH3fC5PWro5pWJ1THjcfEi"
         crossorigin="anonymous"></script>
+
     <script src="app.js"></script>
     <script src="game.js"></script>
 </body>

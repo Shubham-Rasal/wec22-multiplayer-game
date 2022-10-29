@@ -27,6 +27,7 @@ io.on("connection", (socket) => {
 
         console.log(msg);
         const gameId = create(socket.id);
+        console.log(games);
         socket.emit('gameCreated', {msg: 'game created',gameId: gameId });
 
     });
@@ -37,8 +38,16 @@ io.on("connection", (socket) => {
         if(game){
             const {player , start} = join(socket.id, gameId);
             if(start){
-                io.emit('start', {start: true});
+                // emit start game only to the gameId room
+                let game = games[gameId];
+                let players = game.players;
+                players.forEach((player) => {
+                    io.to(player.id).emit('start', {start: start});
+                });
+
             }
+             
+
             socket.emit('gameJoined', {msg: 'game joined', gameId: gameId , start: start});
         }
         else{
@@ -48,7 +57,21 @@ io.on("connection", (socket) => {
    
 
 
-    socket.on("disconnect", () => console.log("Client disconnected"));
+    socket.on("disconnect", () => {
+        console.log("Client disconnected");
+        //delete the player from the game
+         for(let game in games){
+             let players = games[game].players;
+             for(let player in players){
+                 if(players[player].id === socket.id){
+                     players.splice(player, 1);
+                 }
+             }
+         }
+
+        console.log(games);
+        
+    });
 
   });
 
@@ -86,6 +109,7 @@ const join = (id, gameId) => {
     }
     game.players.push(player);
     games[gameId] = game;
-    const start = game.players.length === 2;
+    const start = game.players.length >= 2;
+    console.log(games[gameId])
     return {player: player, start: start};
 }
