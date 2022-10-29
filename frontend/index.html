@@ -11,20 +11,29 @@
 </head>
 
 <body>
-    <section>
-        <h1>Socket io Game</h1>
-        <div id="game">
 
-        </section>
-        <h2>Draw here :</h2>
-        <canvas id="myCanvas" width="400" height="400" >
-            
+    <section>
+        <button id="create">Create a game</button>
+        <div id="gameCode">
+
+        </div>
+        <button id="copy" style="display:none" >Copy</button>
+    </section>
+
+    <section id="game">
+        <h1>Socket io Game</h1>
+        <div >
+
+            <h2>Draw here :</h2>
+            <canvas id="myCanvas" width="400" height="400" >
+                
         </canvas>
         <button id="submit">Submit</button>
         <button id="clear">Clear</button>
         <button id="get" >get image</button>
         <img id="canvasImg"></img>
     </div>
+</section>
 
 
 

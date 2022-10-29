@@ -5,6 +5,7 @@ const cors = require('cors');
 const {Server} = require('socket.io');
 const http = require('http');
 app.use(cors());
+const {v4:uuidv4 } = require('uuid');
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
@@ -13,12 +14,22 @@ const io = new Server(server, {
         });
 
 
+let games = [];
+
 
 io.on("connection", (socket) => {
    console.log("New client connected");
-   socket.emit('connection', null);
+   socket.emit('connection',{msg:"Connection Established."});
 
-   socket.on('save',() => saveCanvas)   
+   socket.on('save',() => saveCanvas)
+   
+    socket.on('create', ({msg}) => {
+
+        console.log(msg);
+        const gameId = create(socket.id);
+        socket.emit('gameCreated', {msg: 'game created',gameId: gameId });
+
+    });
    
 
 
@@ -31,3 +42,21 @@ server.listen(port, () => {
     }
 );
 
+
+
+const create = (id) => {
+    const gameId  = uuidv4();
+        let game = {
+            id: gameId,
+            players: [],
+            winner: null,
+        }
+        let player = {
+            id: id,
+            name: 'player'+game.players.length,
+        }
+        game.players.push(player);
+        games[gameId] = game;
+        return gameId;
+
+}
