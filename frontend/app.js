@@ -8,8 +8,9 @@ const copy = document.getElementById('copy');
 const join = document.getElementById('join');
 const joinGame = document.getElementById('joinCode');
 const connect = document.getElementById('connect');
+const gc = document.getElementById('gc');
 
-let gameId = null;
+let gameId = 123;
 let player = null;
 
 socket.on('connection', ({msg}) => {
@@ -32,14 +33,21 @@ socket.on('gameJoined', ({gameId, start}) => {
     
 });
 
-socket.on('start', ({start}) => {
-    console.log(start);
+socket.on('start', ({start , gameId}) => {
+    console.log({start, gameId});
+    gameId = gameId;
+    gc.innerText = gameId;
      if(start){
         connect.style.display = 'none';
         game.style.display = 'block';
      }
     
 });
+
+
+socket.on('state',(game) =>{
+    console.log(game);
+})
 
 
 socket.on('error', ({msg}) => {
@@ -51,9 +59,7 @@ socket.on('error', ({msg}) => {
 
 
 // make the game invisible
-// game.style.display = 'none';
-
-
+game.style.display = 'none';
 
 
 //evernt listener for the create button
