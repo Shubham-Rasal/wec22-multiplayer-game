@@ -9,6 +9,7 @@ const join = document.getElementById('join');
 const joinGame = document.getElementById('joinCode');
 const connect = document.getElementById('connect');
 const gc = document.getElementById('gc');
+const doodles = document.getElementById('doodles');
 
 let gameId = 123;
 let player = null;
@@ -45,8 +46,19 @@ socket.on('start', ({start , gameId}) => {
 });
 
 
-socket.on('state',(game) =>{
+socket.on('state',({game}) =>{
     console.log(game);
+    doodles.innerHTML = '';
+    // make an image tag and append it to the doodles div
+     let {players} = game;
+        players.forEach((player) => {
+            if(player.canvasData){
+                
+                let img = document.createElement('img');
+                img.src = player.canvasData;
+                doodles.appendChild(img);
+            }
+        });
 })
 
 
