@@ -1,21 +1,11 @@
 let canvas = document.getElementById("myCanvas");
 let ctx = canvas.getContext("2d");
-// const socket = io('http://localhost:3000');
-
-//set widht and height of canvas to 280x280
-// canvas.width = 400;
-// canvas.height = 400;
 
 console.log("ml5 version:", ml5.version);
-// canvas.style.backgroundColor = "white";
-// add border to canvas
+
 canvas.style.border = "1px solid black";
-// ctx.lineWidth = 10;
-// // Set stroke color to black
-// ctx.strokeStyle = "#000000";
 
 let classifier;
-
 let request;
 
 // Two variable to hold the label and confidence of the result
@@ -23,6 +13,8 @@ let label;
 let confidence;
 let button;
 let gcode;
+let what_to_draw;
+let point = 0;
 const width = 280;
 const height = 280;
 
@@ -33,11 +25,20 @@ let y = null;
 
 let mouseDown = false;
 
+const labels = [
+  "chair",
+  "sun",
+  "rain",
+  "panda",
+  "door",
+  "birthday cake",
+  "syringe",
+  "lipstick",
+];
+
 setup();
 async function setup() {
   classifier = await ml5.imageClassifier("DoodleNet", onModelReady);
-  // classifier = await ml5.imageClassifier("MobileNet", onModelReady);
-  // Create a canvas with 280 x 280 px
 
   canvas.addEventListener("mousemove", onMouseUpdate);
   canvas.addEventListener("mousedown", onMouseDown);
@@ -46,12 +47,16 @@ async function setup() {
   // Create a clear canvas button
   const clearBtn = document.getElementById("clear");
 
-
   clearBtn.addEventListener("click", clearCanvas);
   // Create 'label' and 'confidence' div to hold results
   label = document.getElementById("label");
   confidence = document.getElementById("confidence");
   gcode = document.getElementById("gc");
+  what_to_draw = document.getElementById("what-to-draw");
+
+  // add the first label
+  what_to_draw.innerText = `Draw: ${labels[0]}`;
+  
 
   requestAnimationFrame(draw);
 }
@@ -134,6 +139,21 @@ function gotResult(error, results) {
   // Show the first label and confidence
   label.innerText = `Label: ${results[0].label}`;
   confidence.innerText = `Confidence: ${results[0].confidence.toFixed(4)}`;
+  //check if the label is the same as the one we want to draw
+  if (results[0].label === labels[0]) {
+    //if it is, then we can clear the canvas
+    clearCanvas();
+    //and remove the first label from the array
+    labels.shift();
+    //and add the next label
+    what_to_draw.innerText = `Draw: ${labels[0]}`;
+    //add a point
+    point++;
+    // if there are no more labels, then we can end the game
+    if (labels.length === 0) {
+      //end the game
+    }
+  }
   // chair, sun , rain , panda , door , birthday cake , syringe , lipstick
 }
 
@@ -147,11 +167,6 @@ function saveCanvas() {
   socket.emit("canvas", { canvas: dataURL, gameId: gcode.innerText });
 }
 
-// //paint the image with the dataurl
-// function getCanvas() {
-//   console.log(dataURL);
-//   document.getElementById("canvasImg").src = dataURL;
-// }
 
 // //save canvas image
 submitBtn.addEventListener("click", () => {
