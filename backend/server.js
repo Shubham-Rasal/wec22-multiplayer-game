@@ -55,6 +55,8 @@ io.on("connection", (socket) => {
     });
 
     socket.on('canvas',(data)=>saveCanvas(data , socket));
+
+    socket.on('endGame',(data)=>endGame(data , socket));
    
 
 
@@ -127,9 +129,25 @@ const saveCanvas = ({canvas,gameId} , socket) => {
         }
     });
     games[gameId] = game;
-    console.log(games[gameId]);
+   
     
     game.players.forEach((player) => {
         io.to(player.id).emit('state', {game: games[gameId]});
     });
+}
+
+const endGame = ({gameId , winner} , socket) => {
+    let game = games[gameId];
+    let players = game.players;
+
+    players.forEach((player) => {
+        if(player.id === winner){
+            game.winner = player;
+        }
+    });
+    games[gameId] = game;
+    players.forEach((player) => {
+        io.to(player.id).emit('end', {game: games[gameId]});
+    });
+   
 }

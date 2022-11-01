@@ -62,6 +62,19 @@ socket.on('state',({game}) =>{
 })
 
 
+//end game
+socket.on('end', ({game}) => {
+    console.log(game);
+    let {winner} = game;
+    if(winner){
+        alert(`Game Over! ${winner.name} won!`);
+    }else alert(`Game Over! It's a draw!`);
+
+    game.style.display = 'none';
+    connect.style.display = 'block';
+});
+
+
 socket.on('error', ({msg}) => {
     console.log(msg);
 });

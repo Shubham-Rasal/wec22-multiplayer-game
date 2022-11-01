@@ -14,6 +14,7 @@ let confidence;
 let button;
 let gcode;
 let what_to_draw;
+let points;
 let point = 0;
 const width = 280;
 const height = 280;
@@ -26,14 +27,14 @@ let y = null;
 let mouseDown = false;
 
 const labels = [
-  "chair",
-  "sun",
+  // "chair",
+  // "sun",
   "rain",
-  "panda",
-  "door",
-  "birthday cake",
-  "syringe",
-  "lipstick",
+  // "panda",
+  // "door",
+  // "birthday_cake",
+  // "syringe",
+  // "lipstick",
 ];
 
 setup();
@@ -53,6 +54,7 @@ async function setup() {
   confidence = document.getElementById("confidence");
   gcode = document.getElementById("gc");
   what_to_draw = document.getElementById("what-to-draw");
+  points = document.getElementById("points");
 
   // add the first label
   what_to_draw.innerText = `Draw: ${labels[0]}`;
@@ -106,7 +108,7 @@ function onMouseDown(e) {
 
 function onMouseUp(e) {
   mouseDown = false;
-  classifyCanvas();
+  // classifyCanvas();
 }
 
 function onMouseUpdate(e) {
@@ -149,9 +151,11 @@ function gotResult(error, results) {
     what_to_draw.innerText = `Draw: ${labels[0]}`;
     //add a point
     point++;
+    points.innerText = `Points: ${point}`;
     // if there are no more labels, then we can end the game
     if (labels.length === 0) {
       //end the game
+      endGame();
     }
   }
   // chair, sun , rain , panda , door , birthday cake , syringe , lipstick
@@ -163,7 +167,7 @@ const submitBtn = document.getElementById("submit");
 // //make a div and put canvas data there
 function saveCanvas() {
   dataURL = canvas.toDataURL();
-  console.log(dataURL);
+  // console.log(dataURL);
   socket.emit("canvas", { canvas: dataURL, gameId: gcode.innerText });
 }
 
@@ -173,3 +177,26 @@ submitBtn.addEventListener("click", () => {
   saveCanvas();
   classifyCanvas();
 });
+
+
+//end game
+function endGame() {
+  //stop the animation
+  cancelAnimationFrame(request);
+  //clear the canvas
+  clearCanvas();
+  //remove the event listener
+  canvas.removeEventListener("mousemove", onMouseUpdate);
+  canvas.removeEventListener("mousedown", onMouseDown);
+  canvas.removeEventListener("mouseup", onMouseUp);
+  //remove the button
+  submitBtn.remove();
+  //remove the label
+  what_to_draw.remove();
+  //remove the points
+  points.remove();
+  //show the end game message
+  label.innerText = `Game over! You got ${point} points`;
+  //emit the end game event
+  socket.emit("endGame", { gameId: gcode.innerText , winner : socket.id});
+}
