@@ -197,6 +197,8 @@ function endGame() {
   points.remove();
   //show the end game message
   label.innerText = `Game over! You got ${point} points`;
+  canvas.remove();
+  
   //emit the end game event
   socket.emit("endGame", { gameId: gcode.innerText , winner : socket.id});
 }
