@@ -29,3 +29,10 @@ This is a multiplayer game using Socket IO. It is a simple game where you can dr
 <img width="960" alt="win" src="https://user-images.githubusercontent.com/95695273/199312520-5c530535-aa8f-499f-9244-7d402304cbe9.png">
 
 
+
+#### Working
+
+1. The game is made using HTML5 Canvas and Socket IO.
+2. It uses machine learning to predict the drawing using the [ml5.js](https://ml5js.org/) library.
+
+
