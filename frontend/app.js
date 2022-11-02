@@ -37,7 +37,7 @@ socket.on("start", ({ start, gameId }) => {
   gc.innerText = gameId;
   if (start) {
     connect.style.display = "none";
-    game.style.display = "block";
+    game.style.display = "flex";
   }
 });
 
@@ -62,8 +62,10 @@ socket.on("end", ({ game }) => {
   if (winner) {
     alert(`Game Over! ${winner.name} won!`);
   } else alert(`Game Over! It's a draw!`);
-
-  connect.style.display = "block";
+  setTimeout(() => {
+    location.reload();
+  }, 500);
+  connect.style.display = "flex";
   game.style.display = "none";
 });
 

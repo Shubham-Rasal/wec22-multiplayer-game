@@ -1,65 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Sockect io Game</title>
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        Sockect io Game
-    </title>
-</head>
-
-<body>
+  <body>
     <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
 
-
-    <section id="connect" >
-        <button id="create">Create a game</button>
-        <div id="gameCode">
-
-        </div>
-        <button id="copy" style="display:none" >Copy</button>
-        <div class="join">
-            <input type="text" id="joinCode" placeholder="Enter game code">
-            <button id="join">Join</button>
-        </div>
+    <section id="connect">
+      <button id="create">Create a game</button>
+      <div class="code">
+        <div id="gameCode"></div>
+        <button id="copy" style="display: none">Copy</button>
+      </div>
+      <div class="join">
+        <input type="text" id="joinCode" placeholder="Enter game code" />
+        <button id="join">Join</button>
+      </div>
     </section>
 
     <section id="game">
-        <h1>Socket io Game</h1>
-        <div >
-           <span id="gc"></span>
-           <div id="points"></div>
-           <div id="what-to-draw"></div>
+      <h1>Socket io Game</h1>
+      <span id="gc"></span>
+      <div id="points"></div>
+      <div id="what-to-draw"></div>
 
-            <h2>Draw here :</h2>
-            <canvas id="myCanvas" width="280" height="280" >
-                
-        </canvas>
-        <button id="submit">Submit</button>
-        <button id="clear">Clear</button>
-
-        <p id="label">label:</p>
-        <p id="confidence">confidence:</p>
-
-    </div>
-    <div class="doodles">
-        <h2>Other players drawings :</h2>
-        <div id="doodles">
-            
+      <h2>Draw here :</h2>
+      <p id="label">Label:</p>
+      <p id="confidence">Confidence:</p>
+      <div class="wrapper">
+        <div class="doodle">
+          <canvas id="myCanvas" width="280" height="280"> </canvas>
+          <button id="submit">Submit</button>
+          <button id="clear">Clear</button>
         </div>
-    </div>
-</section>
 
+        <div class="doodles">
+          <h2>Other players drawings :</h2>
+          <div id="doodles"></div>
+        </div>
+      </div>
+    </section>
 
-
-    <script src="https://cdn.socket.io/4.5.3/socket.io.min.js"
-        integrity="sha384-WPFUvHkB1aHA5TDSZi6xtDgkF0wXJcIIxXhC6h8OT8EH3fC5PWro5pWJ1THjcfEi"
-        crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.socket.io/4.5.3/socket.io.min.js"
+      integrity="sha384-WPFUvHkB1aHA5TDSZi6xtDgkF0wXJcIIxXhC6h8OT8EH3fC5PWro5pWJ1THjcfEi"
+      crossorigin="anonymous"
+    ></script>
 
     <script src="app.js"></script>
     <script src="game.js"></script>
-</body>
-
+  </body>
 </html>

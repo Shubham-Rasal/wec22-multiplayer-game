@@ -140,7 +140,7 @@ function gotResult(error, results) {
   console.log(results);
   // Show the first label and confidence
   label.innerText = `Label: ${results[0].label}`;
-  confidence.innerText = `Confidence: ${results[0].confidence.toFixed(4)}`;
+  confidence.innerText = `Confidence: ${results[0].confidence.toFixed(4) * 100}%`;
   //check if the label is the same as the one we want to draw
   if (results[0].label === labels[0]) {
     //if it is, then we can clear the canvas
@@ -196,9 +196,13 @@ function endGame() {
   //remove the points
   points.remove();
   //show the end game message
-  label.innerText = `Game over! You got ${point} points`;
+  // label.innerText = `Game over! You got ${point} points`;
   canvas.remove();
-  
+  game.remove();
   //emit the end game event
   socket.emit("endGame", { gameId: gcode.innerText , winner : socket.id});
+  //reload the page
+  setTimeout(() => {
+    location.reload();
+  }, 500);
 }
