@@ -1,4 +1,4 @@
-const socket = io("http://localhost:3000");
+const socket = io("https://multiplayer-game-backend.onrender.com/");
 
 const game = document.getElementById("game");
 const create = document.getElementById("create");
