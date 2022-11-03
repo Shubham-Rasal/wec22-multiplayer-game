@@ -27,14 +27,14 @@ let y = null;
 let mouseDown = false;
 
 const labels = [
-  // "chair",
-  // "sun",
+  "chair",
+  "sun",
   "rain",
-  // "panda",
-  // "door",
-  // "birthday_cake",
-  // "syringe",
-  // "lipstick",
+  "panda",
+  "door",
+  "birthday_cake",
+  "syringe",
+  "lipstick",
 ];
 
 setup();
