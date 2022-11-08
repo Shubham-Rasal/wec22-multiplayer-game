@@ -86,7 +86,8 @@ server.listen(port, () => {
 
 
 const create = (id) => {
-    const gameId  = uuidv4();
+    //call uuid to generate a unique id withe length of 6
+    const gameId = uuidv4().substring(0,6);
         let game = {
             id: gameId,
             players: [],

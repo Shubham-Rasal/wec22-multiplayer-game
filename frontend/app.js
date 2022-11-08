@@ -1,4 +1,4 @@
-const socket = io("https://multiplayer-game-backend.onrender.com/");
+const socket = io("https://multiplayer-game-backend.onrender.com/ ");
 
 const game = document.getElementById("game");
 const create = document.getElementById("create");
@@ -22,6 +22,7 @@ socket.on("gameCreated", ({ gameId }) => {
   console.log(gameId);
   gameId = gameId;
   gameCode.innerText = gameId;
+  game.style.display = "block";
   //make the cpoy button visible
   copy.style.display = "block";
 });

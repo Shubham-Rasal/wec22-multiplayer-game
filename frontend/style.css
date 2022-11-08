@@ -8,9 +8,12 @@ button{
     color: #ffffff;
     border: 1px solid #ffffff;
     border-radius: 5px;
-    padding: 15px;
+    padding: 10px;
+    margin: 10px;
     font-size: 1.2em;
     font-weight: bold;
+    cursor: pointer;
+    
 }
 
 
@@ -33,13 +36,14 @@ input{
 }
 
 #gameCode{
+    display: none;
     height: 40%;
     width: 50%;
-    display: flex;
     font-size: 1.2em;
     padding: 10px;
     margin: 20px;
     background-color: #6affbc;
+    
 }
 
 .code{
@@ -75,11 +79,10 @@ input{
     color: #1a1a1ab0;
     padding: 10px;
     border: 1px solid #ffffff;
-    margin: 10px;
 }
 
 h1{
-    color: #ffffff;
+    color: #090909;
     font-size: 2em;
     font-weight: bold;
     text-align: center;
@@ -88,7 +91,7 @@ h1{
 }
 
 #what-to-draw{
-    color: #ffffff;
+    color: #050505;
     font-size: 2.0em;
     font-weight: bold;
     text-align: center;
@@ -102,6 +105,15 @@ h1{
     padding: 10px;
     background-color: aliceblue;
     
+}
+
+.aim{
+    padding: 10px;
+    margin: 10px;
+    font-size: 1.2em;
+    text-align: center;
+    font-weight: bold;
+    color: #1e1e1f;
 }
 
 #doodles{
@@ -119,6 +131,14 @@ img{
     background-color: #7e7e7e;
 }
 
+canvas{
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    background-color: #ffffff;
+}
+
 p{
     color: #ffffff;
     font-size: 1.5em;
@@ -127,3 +147,17 @@ p{
     margin: 10px;
     padding: 10px;
 }
+
+#connect{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+        
+    width: 100vw;
+    height:100vh;
+    overflow: hidden;
+    background-color: #0095ff;
+}
+

@@ -57,7 +57,7 @@ async function setup() {
   points = document.getElementById("points");
 
   // add the first label
-  what_to_draw.innerText = `Draw: ${labels[0]}`;
+  what_to_draw.innerText = `Draw a  ${labels[0]}`;
   
 
   requestAnimationFrame(draw);
