@@ -25,8 +25,9 @@ This is a multiplayer game using Socket IO. It is a simple game where you can dr
 #### Screenshots
 
 <img width="960" alt="image" src="https://user-images.githubusercontent.com/95695273/200496249-10bf1aca-ffb4-4065-8a5a-7cf9b449e089.png">
-![image](https://user-images.githubusercontent.com/95695273/200496466-d423f036-f0dc-4a23-b363-f17f8dacaf63.png)
-![Uploading image.png…]()
+
+<img width="960" alt="image" src="https://user-images.githubusercontent.com/95695273/200496466-d423f036-f0dc-4a23-b363-f17f8dacaf63.png">
+
 
 
 
