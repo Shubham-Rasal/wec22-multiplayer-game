@@ -139,7 +139,7 @@ function gotResult(error, results) {
   // The results are in an array ordered by confidence.
   console.log(results);
   // Show the first label and confidence
-  label.innerText = `Label: ${results[0].label}`;
+  label.innerText = `The model thinks it is a  ${results[0].label}`;
   //check if the label is the same as the one we want to draw
   if (results[0].label === labels[0]) {
     //if it is, then we can clear the canvas
@@ -147,7 +147,7 @@ function gotResult(error, results) {
     //and remove the first label from the array
     labels.shift();
     //and add the next label
-    what_to_draw.innerText = `Draw: ${labels[0]}`;
+    what_to_draw.innerText = `Draw ${labels[0]}`;
     //add a point
     point++;
     points.innerText = `Points: ${point}`;
