@@ -51,7 +51,7 @@ async function setup() {
   clearBtn.addEventListener("click", clearCanvas);
   // Create 'label' and 'confidence' div to hold results
   label = document.getElementById("label");
-  confidence = document.getElementById("confidence");
+
   gcode = document.getElementById("gc");
   what_to_draw = document.getElementById("what-to-draw");
   points = document.getElementById("points");
@@ -140,7 +140,6 @@ function gotResult(error, results) {
   console.log(results);
   // Show the first label and confidence
   label.innerText = `Label: ${results[0].label}`;
-  confidence.innerText = `Confidence: ${results[0].confidence.toFixed(4) * 100}%`;
   //check if the label is the same as the one we want to draw
   if (results[0].label === labels[0]) {
     //if it is, then we can clear the canvas
