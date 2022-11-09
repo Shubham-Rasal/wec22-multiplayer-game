@@ -1,4 +1,4 @@
-const socket = io("https://multiplayer-game-backend.onrender.com/ ");
+const socket = io("https://multiplayer-game-backend.onrender.com");
 
 const game = document.getElementById("game");
 const create = document.getElementById("create");
@@ -22,8 +22,8 @@ socket.on("gameCreated", ({ gameId }) => {
   console.log(gameId);
   gameId = gameId;
   gameCode.innerText = gameId;
-  game.style.display = "block";
-  //make the cpoy button visible
+  gameCode.style.display = "flex";
+  game.style.display = "none";
   copy.style.display = "block";
 });
 
@@ -76,6 +76,8 @@ socket.on("error", ({ msg }) => {
 
 // make the game invisible
 game.style.display = "none";
+//make the game code invisible
+gameCode.style.display = "none";
 
 //evernt listener for the create button
 create.addEventListener("click", () => {

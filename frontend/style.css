@@ -36,7 +36,6 @@ input{
 }
 
 #gameCode{
-    display: none;
     height: 40%;
     width: 50%;
     font-size: 1.2em;
@@ -56,7 +55,6 @@ input{
 }
 
 #game{
-    display: flex;
     flex-direction: column;
     justify-content: center;
     justify-items: center;
